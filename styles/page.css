@@ -1,0 +1,39 @@
+body{
+  background-color: rgb(130, 130, 130);
+  font-family: Arial;
+}
+
+.page-title{
+  display:flex;
+  flex-direction: row;
+  font-size:40px;
+  color:white;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.block-title{
+  font-size:30px;
+  color:white;
+}
+.block-container{
+  background-color:rgb(250, 100, 0);
+  color:black;
+  font-size:20px;
+  height:200px;
+  margin-bottom:40px;
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+  padding:5px;
+}
+.task-block{
+  background-color: rgb(159, 159, 159);
+  height:30px;
+  font-size:20px;
+  color:black;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 40px 1fr; /* spacing items in row not working */ 
+}
