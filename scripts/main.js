@@ -1,21 +1,6 @@
-const tasks = [
-  {
-    name: "taskName",
-    checkpoint: "taskCheckpoint",
-    dueDate: "taskDueDate",
-    priority: "!"
-  },
-  {
-    name: "taskName2",
-    checkpoint: "taskCheckpoint2",
-    dueDate: "taskDueDate2",
-    priority: "!!"
-  }
-];
+import {blockTitlesList, taskList} from '../data/taskInfo.js';
 
-const blockTitles = ["School","Personal"];
-
-renderTaskBlocks(blockTitles,tasks);
+renderTaskBlocks(blockTitlesList,taskList);
 
 function renderTaskList(tasks){
   let taskListHTML = ``;
@@ -39,7 +24,7 @@ function renderTaskList(tasks){
 }
 
 function renderTaskBlocks(blockTitles,tasks){
-  taskBlockHTML = ``;
+  let taskBlockHTML = ``;
 
   blockTitles.forEach(title => {
     taskBlockHTML += `
