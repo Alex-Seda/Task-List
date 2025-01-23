@@ -1,5 +1,5 @@
 body{
-  background-color: rgb(130, 130, 130);
+  background-color: rgb(237, 237, 237);
   font-family: Arial;
 }
 
@@ -7,14 +7,16 @@ body{
   display:flex;
   flex-direction: row;
   font-size:40px;
-  color:white;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 80px;
+}
+
+.main-content-container{
+  margin:0 80px;
 }
 
 .block-title{
   font-size:30px;
-  color:white;
 }
 .block-container{
   background-color:rgb(250, 100, 0);
@@ -26,14 +28,16 @@ body{
   flex-direction: column;
   gap:10px;
   padding:5px;
+  max-width: 700px;
+  width: 70%;
 }
 .task-block{
   background-color: rgb(159, 159, 159);
   height:30px;
   font-size:20px;
   color:black;
-  display:flex;
-  flex-direction: row;
+  display:grid;
+  grid-template-columns: 40px 1fr 1fr 1fr;
   align-items: center;
-  flex: 40px 1fr; /* spacing items in row not working */ 
+  justify-items: center;
 }
