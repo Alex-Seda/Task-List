@@ -14,3 +14,12 @@ export const taskList = [
 ];
 
 export const blockTitlesList = ["School","Personal"];
+
+export function addTask(name,priority,checkpoint,dueDate){
+  taskList.push({
+    name,
+    checkpoint,
+    dueDate,
+    priority
+  });
+}

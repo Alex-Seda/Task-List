@@ -1,6 +1,8 @@
-import {blockTitlesList, taskList} from '../data/taskInfo.js';
+import {blockTitlesList, taskList, addTask} from '../data/taskInfo.js';
 
-renderTaskBlocks(blockTitlesList,taskList);
+renderPage();
+
+
 
 function renderTaskList(tasks){
   let taskListHTML = ``;
@@ -31,11 +33,37 @@ function renderTaskBlocks(blockTitles,tasks){
       <div class="block-title">
         ${title}
       </div>
+
       <div class="block-container js-block-container"></div>
+
+      <input 
+        class="task-input-name js-task-input-name-${title}"
+        placeholder="Task name">
+      <input type="number" 
+        class="task-input-priority js-task-input-priority-${title}"
+        placeholder="Priority (enter 1-3)">
+      <input type="date" class="task-input-checkpoint js-task-input-checkpoint-${title}">
+      <input type="date" class="task-input-dueDate js-task-input-dueDate-${title}">
+      <button class="task-add-button js-task-add-button-${title}">Add</button>
     `;
   });
   
   document.querySelector('.js-main-content-container').innerHTML = taskBlockHTML;
 
+  blockTitles.forEach(title => {
+    document.querySelector(`.js-task-add-button-${title}`).addEventListener("click", () => {
+      const nameInput = document.querySelector(`.js-task-input-name-${title}`).value;
+      const priorityInput = document.querySelector(`.js-task-input-priority-${title}`).value;
+      const checkpointInput = document.querySelector(`.js-task-input-checkpoint-${title}`).value;
+      const dateInput = document.querySelector(`.js-task-input-dueDate-${title}`).value;
+      addTask(nameInput,priorityInput,checkpointInput,dateInput);
+      renderPage();
+    });
+  });
+
   renderTaskList(tasks);
+}
+
+function renderPage(){
+  renderTaskBlocks(blockTitlesList,taskList);
 }
