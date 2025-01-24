@@ -1,8 +1,8 @@
-import {blockTitlesList, taskList, addTask} from '../data/taskInfo.js';
+import {categoryList, taskList, addTask} from '../data/taskInfo.js';
 
 renderPage();
 
-
+/* Prevent users from entering the same category name twice */
 
 function renderTaskList(tasks){
   let taskListHTML = ``;
@@ -25,37 +25,37 @@ function renderTaskList(tasks){
   /* Insert code that adds event listiners to any buttons in each task */ 
 }
 
-function renderTaskBlocks(blockTitles,tasks){
-  let taskBlockHTML = ``;
+function renderCategories(categories,tasks){
+  let categoryHTML = ``;
 
-  blockTitles.forEach(title => {
-    taskBlockHTML += `
+  categories.forEach(category => {
+    categoryHTML += `
       <div class="block-title">
-        ${title}
+        ${category.name}
       </div>
 
       <div class="block-container js-block-container"></div>
 
       <input 
-        class="task-input-name js-task-input-name-${title}"
+        class="task-input-name js-task-input-name-${category.name}"
         placeholder="Task name">
       <input type="number" 
-        class="task-input-priority js-task-input-priority-${title}"
+        class="task-input-priority js-task-input-priority-${category.name}"
         placeholder="Priority (enter 1-3)">
-      <input type="date" class="task-input-checkpoint js-task-input-checkpoint-${title}">
-      <input type="date" class="task-input-dueDate js-task-input-dueDate-${title}">
-      <button class="task-add-button js-task-add-button-${title}">Add</button>
+      <input type="date" class="task-input-checkpoint js-task-input-checkpoint-${category.name}">
+      <input type="date" class="task-input-dueDate js-task-input-dueDate-${category.name}">
+      <button class="task-add-button js-task-add-button-${category.name}">Add</button>
     `;
   });
   
-  document.querySelector('.js-main-content-container').innerHTML = taskBlockHTML;
+  document.querySelector('.js-main-content-container').innerHTML = categoryHTML;
 
-  blockTitles.forEach(title => {
-    document.querySelector(`.js-task-add-button-${title}`).addEventListener("click", () => {
-      const nameInput = document.querySelector(`.js-task-input-name-${title}`).value;
-      const priorityInput = document.querySelector(`.js-task-input-priority-${title}`).value;
-      const checkpointInput = document.querySelector(`.js-task-input-checkpoint-${title}`).value;
-      const dateInput = document.querySelector(`.js-task-input-dueDate-${title}`).value;
+  categories.forEach(category => {
+    document.querySelector(`.js-task-add-button-${category.name}`).addEventListener("click", () => {
+      const nameInput = document.querySelector(`.js-task-input-name-${category.name}`).value;
+      const priorityInput = document.querySelector(`.js-task-input-priority-${category.name}`).value;
+      const checkpointInput = document.querySelector(`.js-task-input-checkpoint-${category.name}`).value;
+      const dateInput = document.querySelector(`.js-task-input-dueDate-${category.name}`).value;
       addTask(nameInput,priorityInput,checkpointInput,dateInput);
       renderPage();
     });
@@ -65,5 +65,5 @@ function renderTaskBlocks(blockTitles,tasks){
 }
 
 function renderPage(){
-  renderTaskBlocks(blockTitlesList,taskList);
+  renderCategories(categoryList,taskList);
 }
