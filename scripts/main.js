@@ -1,10 +1,10 @@
-import {categoryList, taskList, addTask} from '../data/taskInfo.js';
+import {categoryList, addTask} from '../data/taskInfo.js';
 
 renderPage();
 
 /* Prevent users from entering the same category name twice */
 
-function renderTaskList(tasks){
+function renderTaskList(name,tasks){
   let taskListHTML = ``;
 
   tasks.forEach((task) => {
@@ -18,14 +18,14 @@ function renderTaskList(tasks){
     `;
   });
 
-  document.querySelectorAll('.js-block-container').forEach(container => {
+  document.querySelectorAll(`.js-block-container-${name}`).forEach(container => {
     container.innerHTML = taskListHTML
   });
 
   /* Insert code that adds event listiners to any buttons in each task */ 
 }
 
-function renderCategories(categories,tasks){
+function renderCategories(categories){
   let categoryHTML = ``;
 
   categories.forEach(category => {
@@ -34,7 +34,7 @@ function renderCategories(categories,tasks){
         ${category.name}
       </div>
 
-      <div class="block-container js-block-container"></div>
+      <div class="block-container js-block-container-${category.name}"></div>
 
       <input 
         class="task-input-name js-task-input-name-${category.name}"
@@ -50,20 +50,24 @@ function renderCategories(categories,tasks){
   
   document.querySelector('.js-main-content-container').innerHTML = categoryHTML;
 
+  
   categories.forEach(category => {
+
+    /* Add listeners for each add button for each category */
     document.querySelector(`.js-task-add-button-${category.name}`).addEventListener("click", () => {
       const nameInput = document.querySelector(`.js-task-input-name-${category.name}`).value;
       const priorityInput = document.querySelector(`.js-task-input-priority-${category.name}`).value;
       const checkpointInput = document.querySelector(`.js-task-input-checkpoint-${category.name}`).value;
       const dateInput = document.querySelector(`.js-task-input-dueDate-${category.name}`).value;
-      addTask(nameInput,priorityInput,checkpointInput,dateInput);
+      addTask(category.name,nameInput,priorityInput,checkpointInput,dateInput);
       renderPage();
     });
-  });
 
-  renderTaskList(tasks);
+    /* Populate the taskList inside of each category */
+    renderTaskList(category.name, category.taskList);
+  });
 }
 
 function renderPage(){
-  renderCategories(categoryList,taskList);
+  renderCategories(categoryList);
 }
